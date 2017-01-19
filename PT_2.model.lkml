@@ -22,7 +22,7 @@ explore: user_activity {
 }
 explore: hits_per_minute {
   sql_always_where: bucket IN (
-  cast(floor(to_unixtime(current_timestamp - interval '30' minute) / 3660) as bigint)
+  cast(floor(to_unixtime(current_timestamp - interval '30' minute) / 3600) as bigint)
  ,cast(floor(to_unixtime(current_timestamp)/3600 ) as bigint)
   );;
 }
@@ -43,7 +43,7 @@ explore: hits_per_minute_demo {
   sql_always_where: bucket= 412381;;
   }
 explore: hits_per_second_demo {
-  sql_always_where: bucket>=  24747050;;
+  sql_always_where: bucket>  24747050;;
 }
 explore: events_demo {
   sql_always_where: bucket > 24744998;;
