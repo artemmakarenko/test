@@ -43,8 +43,8 @@ explore: hits_per_minute_demo {
   sql_always_where: bucket>= 412381;;
   }
 explore: hits_per_second_demo {
-  sql_always_where: bucket>  24747050;;
+  sql_always_where: bucket=24747310;;
 }
 explore: events_demo {
-  sql_always_where: bucket > 24744998;;
+  sql_always_where: bucket >24744998;;
 }
