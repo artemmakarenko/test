@@ -1,4 +1,4 @@
-connection: "presto_db_connection"
+connection: "presto_db_connection_stg"
 
 include: "*.view.lkml"         # include all views in this project
 include: "*.dashboard.lookml"  # include all dashboards in this project
@@ -15,5 +15,3 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #     sql_on: ${users.id} = ${orders.user_id}
 #   }
 # }
-
-# explore: hits_per_second_old {}

@@ -1,11 +1,6 @@
-view: hits_per_second {
-  sql_table_name: cassandra.bit.hits_per_second ;;
+view: hits_per_minute_demo {
+  sql_table_name: cassandra.bit.hits_per_minute ;;
   suggestions: no
-
-  dimension: bucket {
-    type: number
-    sql: ${TABLE}.bucket ;;
-  }
 
   dimension: brand {
     type: string
@@ -22,6 +17,11 @@ view: hits_per_second {
     sql: ${TABLE}.licensee ;;
   }
 
+  dimension: bucket {
+    type: number
+    sql: ${TABLE}."bucket" ;;
+  }
+
   dimension: platform {
     type: string
     sql: ${TABLE}.platform ;;
@@ -34,7 +34,7 @@ view: hits_per_second {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, date,hour,minute, second, week, month]
+    timeframes: [time, date, week, month, minute, hour]
     sql: ${TABLE}.ts ;;
   }
 
@@ -49,4 +49,19 @@ view: hits_per_second {
     drill_fields: []
   }
 
+  measure: percent_sum_growth {
+    type: percent_of_previous
+    sql: ${sum} ;;
+  }
+
+  measure: percent_of_total_sum {
+    type: percent_of_total
+    sql: ${sum} ;;
+  }
+
+  measure: cumulative_total_sum {
+    type: running_total
+    sql: ${sum} ;;
+    value_format_name: usd
+  }
 }

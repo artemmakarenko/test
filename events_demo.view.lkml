@@ -1,4 +1,4 @@
-view: events {
+view: events_demo {
   sql_table_name: cassandra.bit.events ;;
   suggestions: no
 
@@ -16,7 +16,7 @@ view: events {
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
- #   drill_fields:  [category, action, label]
+    #   drill_fields:  [category, action, label]
   }
 
   dimension: category {
@@ -39,13 +39,13 @@ view: events {
   dimension: licensee {
     type: string
     sql: ${TABLE}.licensee ;;
- #   drill_fields:  [category, action, label]
+    #   drill_fields:  [category, action, label]
   }
 
   dimension: platform {
     type: string
     sql: ${TABLE}.platform ;;
-  #  drill_fields:  [category, action, label]
+    #  drill_fields:  [category, action, label]
   }
 
   dimension: product {
@@ -89,9 +89,14 @@ view: events {
     suggestions: ["casino","IMS"]
 
   }
+  dimension: product_filter2 {
+    sql:select distinct ${TABLE}.product ;;
+    # suggestions: []
+  }
+
   measure: percent_of_total_hits {
     type: percent_of_total
     sql: ${sum};;
-   }
+  }
 
 }

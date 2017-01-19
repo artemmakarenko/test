@@ -1,5 +1,5 @@
-view: hits_per_second {
-  sql_table_name: cassandra.bit.hits_per_second ;;
+view: user_activity_demo {
+  sql_table_name: cassandra.bit.user_activity ;;
   suggestions: no
 
   dimension: bucket {
@@ -7,14 +7,14 @@ view: hits_per_second {
     sql: ${TABLE}.bucket ;;
   }
 
+  dimension: active_users {
+    type: number
+    sql: ${TABLE}.active_users ;;
+  }
+
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
-  }
-
-  dimension: hits {
-    type: number
-    sql: ${TABLE}.hits ;;
   }
 
   dimension: licensee {
@@ -34,7 +34,7 @@ view: hits_per_second {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, date,hour,minute, second, week, month]
+    timeframes: [time, date, week, month, hour, minute, second]
     sql: ${TABLE}.ts ;;
   }
 
@@ -45,8 +45,12 @@ view: hits_per_second {
 
   measure: sum {
     type: sum
-    sql:  ${TABLE}.hits ;;
-    drill_fields: []
+    sql:  ${TABLE}.active_users ;;
+    drill_fields: [user_details*]
+  }
+
+  set: user_details {
+    fields: [platform, sum]
   }
 
 }

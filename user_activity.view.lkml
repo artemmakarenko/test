@@ -1,6 +1,11 @@
 view: user_activity {
-  sql_table_name: cassandra.rt_reports.user_activity ;;
+  sql_table_name: cassandra.bit.user_activity ;;
   suggestions: no
+
+  dimension: bucket {
+    type: number
+    sql: ${TABLE}.bucket ;;
+  }
 
   dimension: active_users {
     type: number
@@ -29,7 +34,7 @@ view: user_activity {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, date, week, month]
+    timeframes: [time, date, week, month, hour, minute, second]
     sql: ${TABLE}.ts ;;
   }
 
@@ -48,4 +53,8 @@ view: user_activity {
     fields: [platform, sum]
   }
 
+  dimension: custom_min {
+    type: string
+    sql: ${TABLE}.DATE_FORMAT(ts,'%i') ;;
+  }
 }
