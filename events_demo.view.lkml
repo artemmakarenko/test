@@ -99,4 +99,10 @@ view: events_demo {
     sql: ${sum};;
   }
 
+  dimension: L2 {
+    sql: ${TABLE}.licensee ;;
+    suggest_explore: licensees
+    suggest_dimension: licensees.licensee_name
+  }
+
 }
