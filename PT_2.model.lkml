@@ -38,7 +38,7 @@ explore: events {
 explore: licensees {}
 
 explore: user_activity_demo {
-  sql_always_where: bucket =  24746400 ;;
+  sql_always_where: bucket = 24746400 ;;
 }
 explore: hits_per_minute_demo {
   sql_always_where: bucket >= 412381;;

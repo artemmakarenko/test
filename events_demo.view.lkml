@@ -42,12 +42,6 @@ view: events_demo {
     #   drill_fields:  [category, action, label]
   }
 
- dimension: licensees {
-   sql:  licensees.licensee_name;;
-   suggest_dimension: licensees.licensee_name
- }
-
-
   dimension: platform {
     type: string
     sql: ${TABLE}.platform ;;
