@@ -35,6 +35,7 @@ explore: events {
   sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
 }
 
+explore: licensees {}
 
 explore: user_activity_demo {
   sql_always_where: bucket = 24746400 ;;
@@ -46,5 +47,5 @@ explore: hits_per_second_demo {
   sql_always_where: bucket = 24747383;;
 }
 explore: events_demo {
-  sql_always_where: bucket =24744998;;
+  sql_always_where: bucket >=24744998;;
 }
