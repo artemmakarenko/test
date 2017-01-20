@@ -66,7 +66,7 @@ view: events {
 
   measure: sum {
     type: sum
-    sql: ${TABLE}.hits ;;
+    sql: coalesce(${TABLE}.hits,0) ;;
   }
 
 #   measure: percent_of_total_hits {
@@ -74,21 +74,21 @@ view: events {
 #     sql: ${sum} ;;
 #   }
 
-  dimension: licensee_filter {
-    sql: ${TABLE}.licensee ;;
-    suggestions: ["playtechhorizon-licensees","UNKNOWN"]
-  }
+  # dimension: licensee_filter {
+  #   sql: ${TABLE}.licensee ;;
+  #   suggestions: ["playtechhorizon-licensees","UNKNOWN"]
+  # }
 
-  dimension: brand_filter {
-    sql: ${TABLE}.brand ;;
-    suggestions: ["playtechhorizon","PT"    ]
-  }
+  # dimension: brand_filter {
+  #   sql: ${TABLE}.brand ;;
+  #   suggestions: ["playtechhorizon","PT"    ]
+  # }
 
-  dimension: product_filter {
-    sql: ${TABLE}.product ;;
-    suggestions: ["casino","IMS"]
+  # dimension: product_filter {
+  #   sql: ${TABLE}.product ;;
+  #   suggestions: ["casino","IMS"]
 
-  }
+  # }
   measure: percent_of_total_hits {
     type: percent_of_total
     sql: ${sum};;

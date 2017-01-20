@@ -100,9 +100,9 @@ view: events_demo {
   }
 
   dimension: L2 {
-    sql: ${TABLE}.licensee ;;
-    suggest_explore: licensees
-    suggest_dimension: licensees.licensee_name
+    sql: licensees.licensee_name ;;
+#    suggest_explore: licensees
+ #   suggest_dimension: licensees.licensee_name
   }
 
 }

@@ -1,6 +1,6 @@
 view: licensees {
   sql_table_name: cassandra.bit.licensees ;;
-  suggestions: no
+  suggestions: yes
 
   dimension: brand_id {
     type: number
@@ -25,7 +25,12 @@ view: licensees {
 
   dimension: licensee_name {
     type: string
-    sql: ${TABLE}.licensee_name ;;
+    full_suggestions: yes
+    sql: ${TABLE}.licensee_name;;
+#     filters: {
+#       field: licensee_name
+#       value: "0"
+#     }
   }
 
   dimension: licensee_type {
@@ -47,12 +52,6 @@ view: licensees {
 #     type: count
 #     drill_fields: [detail*]
 #   }
-
-  dimension: licensee_name2 {
-    type: string
-    sql: ${TABLE}.licensee_name ;;
-    suggest_dimension: licensees.licensee_name;;
-  }
 
   # ----- Sets of fields for drilling ------
 #   set: detail {
