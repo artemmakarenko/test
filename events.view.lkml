@@ -59,11 +59,10 @@ view: events {
     sql: ${TABLE}.ts ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
-
+  # measure: count {
+  #   type: count
+  #   drill_fields: []
+  # }
   measure: sum {
     type: sum
     sql: coalesce(${TABLE}.hits,0) ;;
@@ -73,16 +72,6 @@ view: events {
 #     type: percent_of_total
 #     sql: ${sum} ;;
 #   }
-
-  # dimension: licensee_filter {
-  #   sql: ${TABLE}.licensee ;;
-  #   suggestions: ["playtechhorizon-licensees","UNKNOWN"]
-  # }
-
-  # dimension: brand_filter {
-  #   sql: ${TABLE}.brand ;;
-  #   suggestions: ["playtechhorizon","PT"    ]
-  # }
 
   # dimension: product_filter {
   #   sql: ${TABLE}.product ;;
