@@ -36,6 +36,7 @@ explore: events {
 }
 
 explore: licensees {}
+explore: products {}
 
 explore: user_activity_demo {
   sql_always_where: bucket = 24746400 ;;
