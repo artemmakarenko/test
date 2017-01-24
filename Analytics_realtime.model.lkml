@@ -7,15 +7,15 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 # # Select the views that should be a part of this model,
 # # and define the joins that connect them together.
 #
-# explore: order_items {
+# explore: licensees {
 #   join: orders {
 #     sql_on: ${orders.id} = ${order_items.order_id}
 #   }
-#
+
 #   join: users {
 #     sql_on: ${users.id} = ${orders.user_id}
 #   }
-# }
+
 
 explore: user_activity {
 #   sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
@@ -35,7 +35,12 @@ explore: events {
   sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
 }
 
-explore: licensees {}
+explore: licensees {
+  # join: products {
+  #   sql_on: ${licensees.product} = ${products.product} ;;
+  # }
+}
+
 explore: products {}
 
 explore: user_activity_demo {
