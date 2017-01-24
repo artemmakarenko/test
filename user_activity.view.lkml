@@ -46,7 +46,7 @@ view: user_activity {
   measure: sum {
     type: sum
     sql:  coalesce(${TABLE}.active_users,0) ;;
-    drill_fields: [user_details*]
+    # drill_fields: [user_details*]
   }
 
   set: user_details {
