@@ -27,9 +27,9 @@ explore: hits_per_minute {
   );;
 }
 explore: hits_per_second {
-#   sql_always_where: bucket IN (cast(floor(to_unixtime(current_timestamp - interval '59' second) / 60) as bigint)
-# , cast(floor(to_unixtime(current_timestamp) / 60) as bigint))
-#   ;;
+  sql_always_where: bucket IN (cast(floor(to_unixtime(current_timestamp - interval '59' second) / 60) as bigint)
+, cast(floor(to_unixtime(current_timestamp) / 60) as bigint))
+  ;;
 }
 explore: events {
    sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
