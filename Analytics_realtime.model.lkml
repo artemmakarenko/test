@@ -16,9 +16,8 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #     sql_on: ${users.id} = ${orders.user_id}
 #   }
 
-
 explore: user_activity {
-#   sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
+   sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
 }
 explore: hits_per_minute {
   sql_always_where: bucket IN (
@@ -43,15 +42,7 @@ explore: licensees {
 
 explore: products {}
 
-explore: user_activity_demo {
-  sql_always_where: bucket =24746400 ;;
-}
-explore: hits_per_minute_demo {
-  sql_always_where: bucket >= 412381;;
-  }
-explore: hits_per_second_demo {
-  sql_always_where: bucket = 24747383;;
-}
-explore: events_demo {
-  sql_always_where: bucket >= 24744998;;
-}
+explore: user_activity_demo {}
+explore: hits_per_minute_demo {}
+explore: hits_per_second_demo {}
+explore: events_demo {}

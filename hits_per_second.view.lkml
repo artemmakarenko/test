@@ -46,7 +46,10 @@ view: hits_per_second {
   measure: sum {
     type: sum
     sql:  ${TABLE}.hits ;;
-    drill_fields: []
+    drill_fields: [user_details*]
+  }
+  set: user_details {
+    fields: [licensee,brand,product,platform, sum ]
   }
 
 }

@@ -46,15 +46,14 @@ view: user_activity {
   measure: sum {
     type: sum
     sql:  coalesce(${TABLE}.active_users,0) ;;
-    # drill_fields: [user_details*]
+    # action: {
+    #   url: "https://54.154.184.108/looks/101"
+    # }
+    drill_fields: [user_details*]
   }
 
   set: user_details {
-    fields: [platform, sum]
+    fields: [user_activity.licensee,user_activity.brand,user_activity.product,user_activity.platform, sum ]
   }
 
-  dimension: custom_min {
-    type: string
-    sql: ${TABLE}.DATE_FORMAT(ts,'%i') ;;
-  }
 }
