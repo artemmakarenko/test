@@ -1,6 +1,6 @@
 view: user_activity {
   sql_table_name: cassandra.bit.user_activity ;;
-  suggestions: no
+  suggestions: yes
 
   dimension: bucket {
     type: number
@@ -38,22 +38,24 @@ view: user_activity {
     sql: ${TABLE}.ts ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
+  measure: max {
+    type: max
+    sql:  ${TABLE}.ts ;;
   }
 
-  measure: sum {
+  measure: sum_of_active_users {
     type: sum
-    sql:  coalesce(${TABLE}.active_users,0) ;;
-    # action: {
+    sql:  ${TABLE}.active_users ;;
+    # link: {
+    #   label: "Deatail"
     #   url: "https://54.154.184.108/looks/101"
+    #   icon_url: "http://looker.com/favicon.ico"
     # }
-    drill_fields: [user_details*]
+    drill_fields: [licensee,brand,product,platform,active_users]
   }
 
-  set: user_details {
-    fields: [user_activity.licensee,user_activity.brand,user_activity.product,user_activity.platform, sum ]
-  }
+#   set: user_details {
+#     fields: [licensee,brand,product,platform]
+#   }
 
 }

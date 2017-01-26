@@ -34,7 +34,7 @@ view: hits_per_minute {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, date, week, month, minute, hour]
+    timeframes: [time, date, week, month, minute, hour, second]
     sql: ${TABLE}.ts ;;
   }
 

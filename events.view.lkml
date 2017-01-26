@@ -63,7 +63,7 @@ view: events {
   #   type: count
   #   drill_fields: []
   # }
-  measure: sum {
+  measure: sum_of_events {
     type: sum
     sql: coalesce(${TABLE}.hits,0) ;;
   }
@@ -80,7 +80,7 @@ view: events {
   # }
   measure: percent_of_total_hits {
     type: percent_of_total
-    sql: ${sum};;
+    sql: ${sum_of_events};;
    }
 
 }
