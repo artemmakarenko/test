@@ -51,7 +51,7 @@ view: user_activity {
     #   url: "https://54.154.184.108/looks/101"
     #   icon_url: "http://looker.com/favicon.ico"
     # }
-    drill_fields: [licensee,brand,product,platform,active_users]
+    # drill_fields: [licensee,brand,product,platform,active_users]
   }
 
 #   set: user_details {

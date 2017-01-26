@@ -17,21 +17,27 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 
 explore: user_activity {
-   sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
+  sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint) and (ts >= current_timestamp - interval '10' second)
+  ;;
 }
 explore: hits_per_minute {
   sql_always_where: bucket IN (
   cast(floor(to_unixtime(current_timestamp - interval '30' minute) / 3600) as bigint)
-,cast(floor(to_unixtime(current_timestamp)/3600 ) as bigint)
-  );;
+,cast(floor(to_unixtime(current_timestamp)/3600 ) as bigint))
+and (ts >= current_timestamp - interval '30' minute)
+;;
 }
 explore: hits_per_second {
   sql_always_where: bucket IN (cast(floor(to_unixtime(current_timestamp - interval '59' second) / 60) as bigint)
 , cast(floor(to_unixtime(current_timestamp) / 60) as bigint))
+and (ts >= current_timestamp - interval '60' second)
   ;;
 }
 explore: events {
-  sql_always_where: bucket = cast(floor(to_unixtime(current_timestamp) / 60) as bigint);;
+  sql_always_where: bucket IN (cast(floor(to_unixtime(current_timestamp - interval '59' second) / 60) as bigint)
+  , cast(floor(to_unixtime(current_timestamp) / 60) as bigint))
+  and (ts >= current_timestamp - interval '10' second)
+  ;;
 }
 
 explore: licensees {
@@ -39,7 +45,7 @@ explore: licensees {
   #   sql_on: ${licensees.product} = ${products.product} ;;
   # }
 }
-
+explore: user_activity_derive {}
 explore: products {}
 
 explore: user_activity_demo {}
