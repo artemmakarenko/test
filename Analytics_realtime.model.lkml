@@ -17,6 +17,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 
 explore: user_activity {
+  persist_for: "5 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '10' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
