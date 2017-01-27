@@ -34,7 +34,7 @@ view: user_activity {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, date, week, month, hour, minute, second]
+    timeframes: [time, date, week, month, hour, minute, second, raw]
     sql: ${TABLE}.ts ;;
   }
 

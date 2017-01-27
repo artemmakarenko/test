@@ -20,19 +20,26 @@ explore: user_activity {
   sql_always_where:
   bucket = cast(truncate(to_unixtime(current_timestamp - interval '10' second) / 60) as bigint) and (ts >= current_timestamp - interval '10' second)
   ;;
+  # join: user_activity_derive {
+  #   sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
+  #   relationship: many_to_one
+  #}
 }
 explore: hits_per_minute {
+  persist_for: "5 seconds"
   sql_always_where:
   bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '30' minute) / 3600) as bigint)
   ,cast(truncate(to_unixtime(current_timestamp) / 3600) as bigint) ) and (ts >= current_timestamp - interval '30' minute);;
 }
 explore: hits_per_second {
+  persist_for: "5 seconds"
   sql_always_where: bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '60' second) / 60) as bigint)
-, cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
-and (ts >= current_timestamp - interval '60' second)
+  , cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
+  and (ts >= current_timestamp - interval '60' second)
   ;;
 }
 explore: events {
+  persist_for: "5 seconds"
   sql_always_where:
   bucket = cast(truncate(to_unixtime(current_timestamp - interval '10' second) / 60) as bigint)
   AND (ts >= current_timestamp - interval '10' second)

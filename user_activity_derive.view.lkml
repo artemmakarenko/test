@@ -11,7 +11,7 @@ view: user_activity_derive {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, date, week, month, hour, minute, second]
+    timeframes: [time, date, week, month, hour, minute, second, raw]
     sql: ${TABLE}.max_ts ;;
   }
 
