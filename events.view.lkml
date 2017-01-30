@@ -55,7 +55,7 @@ view: events {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, hour, minute,second, date, week, month]
+    timeframes: [time, hour, minute,second, date, week, month, raw]
     sql: ${TABLE}.ts ;;
   }
 

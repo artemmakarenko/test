@@ -47,6 +47,10 @@ explore: events {
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
   AND (ts >= current_timestamp - interval '10' second)
   ;;
+  join: events_derive {
+    sql_on: ${events.ts_raw}=${events_derive.ts_raw} ;;
+    relationship: many_to_one
+  }
 }
 
 explore: licensees {
@@ -55,6 +59,7 @@ explore: licensees {
   # }
 }
 explore: user_activity_derive {}
+explore: events_derive {}
 explore: products {}
 
 explore: user_activity_demo {}
