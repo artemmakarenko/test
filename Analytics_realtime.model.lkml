@@ -19,14 +19,13 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 explore: user_activity {
   persist_for: "5 seconds"
   sql_always_where:
-  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '10' second) / 60) as bigint),
+  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '19' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
-  and (ts >= current_timestamp - interval '10' second)
-  ;;
-  # join: user_activity_derive {
-  #   sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
-  #   relationship: many_to_one
-  #}
+  and (ts >= current_timestamp - interval '19' second);;
+  join: user_activity_derive {
+    sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
+    relationship: many_to_one
+  }
 }
 explore: hits_per_minute {
   persist_for: "5 seconds"
