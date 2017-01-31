@@ -19,7 +19,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 explore: user_activity {
   persist_for: "5 seconds"
   sql_always_where:
-  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '10' second) / 60) as bigint),
+  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '19' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
   and (ts >= current_timestamp - interval '19' second);;
   join: user_activity_derive {
@@ -43,7 +43,7 @@ explore: hits_per_second {
 explore: events {
   persist_for: "5 seconds"
   sql_always_where:
-  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '10' second) / 60) as bigint),
+  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '19' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
   AND (ts >= current_timestamp - interval '19' second)
   ;;
