@@ -1,11 +1,6 @@
 view: user_activity {
   sql_table_name: cassandra.bit.user_activity ;;
-  suggestions: yes
-
-  dimension: bucket {
-    type: number
-    sql: ${TABLE}.bucket ;;
-  }
+  suggestions: no
 
   dimension: active_users {
     type: number
@@ -17,9 +12,34 @@ view: user_activity {
     sql: ${TABLE}.brand ;;
   }
 
+  dimension: bucket {
+    type: number
+    sql: ${TABLE}.bucket ;;
+  }
+
+  dimension: country {
+    type: string
+    sql: ${TABLE}.country ;;
+  }
+
+  dimension: lang {
+    type: string
+    sql:
+    CASE
+      WHEN ${TABLE}.lang='NULL' THEN 'Unknown'
+      ELSE ${TABLE}.lang
+    END
+    ;;
+  }
+
   dimension: licensee {
     type: string
     sql: ${TABLE}.licensee ;;
+  }
+
+  dimension: mode {
+    type: string
+    sql: ${TABLE}.mode ;;
   }
 
   dimension: platform {
@@ -38,19 +58,9 @@ view: user_activity {
     sql: ${TABLE}.ts ;;
   }
 
-  measure: max {
-    type: max
-    sql:  ${TABLE}.ts ;;
-  }
-
   measure: sum_of_active_users {
     type: sum
     sql:  ${TABLE}.active_users ;;
-    # link: {
-    #   label: "Deatail"
-    #   url: "https://54.154.184.108/looks/101"
-    #   icon_url: "http://looker.com/favicon.ico"
-    # }
     drill_fields: [licensee,brand,product,platform,active_users]
   }
 

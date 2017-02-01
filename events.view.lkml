@@ -9,7 +9,12 @@ view: events {
 
   dimension: action {
     type: string
-    sql: ${TABLE}.action ;;
+    sql: ${TABLE}.action;;
+    # CASE
+    #   WHEN ${TABLE}.action='NULL' THEN 'Unknown'
+    #   ELSE ${TABLE}.action
+    # END
+    # ;;
     drill_fields:  [category, label]
   }
 
