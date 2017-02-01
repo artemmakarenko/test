@@ -7,7 +7,7 @@ view: hits_per_minute {
     sql: ${TABLE}.brand ;;
   }
 
-  dimension: hits {
+  dimension: amount_of_events {
     type: number
     sql: ${TABLE}.hits ;;
   }
@@ -49,8 +49,9 @@ view: hits_per_minute {
     drill_fields: [user_details*]
   }
   set: user_details {
-  fields: [licensee,brand,product,platform, sum ]
+  fields: [licensee,brand,product,platform, amount_of_events ]
   }
+
 
   measure: percent_sum_growth {
     type: percent_of_previous

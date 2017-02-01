@@ -12,7 +12,7 @@ view: hits_per_second {
     sql: ${TABLE}.brand ;;
   }
 
-  dimension: hits {
+  dimension: amount_of_events {
     type: number
     sql: ${TABLE}.hits ;;
   }
@@ -49,7 +49,7 @@ view: hits_per_second {
     drill_fields: [user_details*]
   }
   set: user_details {
-    fields: [licensee,brand,product,platform, sum ]
+    fields: [licensee,brand,product,platform, amount_of_events ]
   }
 
 }

@@ -25,7 +25,7 @@ view: events {
     drill_fields:  [ action, label]
   }
 
-  dimension: hits {
+  dimension: amount_of_events {
     type: number
     sql: ${TABLE}.hits ;;
   }
@@ -33,7 +33,7 @@ view: events {
   dimension: label {
     type: string
     sql: ${TABLE}.label ;;
-    drill_fields:  [category, action]
+    # drill_fields:  [category, action, amount_of_events]
   }
 
   dimension: licensee {
@@ -66,8 +66,12 @@ view: events {
   measure: sum_of_events {
     type: sum
     sql: coalesce(${TABLE}.hits,0) ;;
+    drill_fields: [user_details*]
   }
 
+  set: user_details {
+    fields: [category, action, label, amount_of_events ]
+  }
 #   measure: percent_of_total_hits {
 #     type: percent_of_total
 #     sql: ${sum} ;;
