@@ -61,7 +61,7 @@ view: user_activity {
   measure: sum_of_active_users {
     type: sum
     sql:  ${TABLE}.active_users ;;
-    drill_fields: [licensee,brand,product,platform,active_users]
+  #  drill_fields: [licensee,brand,product,platform,active_users]
   }
 
   set: user_details {
