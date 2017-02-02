@@ -49,7 +49,7 @@ view: user_activity {
 
   dimension: product {
     type: string
-    sql: ${TABLE}.product ;;
+    sql: lower(${TABLE}.product) ;;
   }
 
   dimension_group: ts {

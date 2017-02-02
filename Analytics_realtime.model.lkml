@@ -17,6 +17,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 
 explore: user_activity {
+  access_filter_fields: [user_activity.product]
   persist_for: "5 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
@@ -26,14 +27,20 @@ explore: user_activity {
     sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
     relationship: many_to_one
   }
+  join: countries {
+    sql_on: lower(${user_activity.country})=lower(${countries.name}) ;;
+    relationship: many_to_one
+  }
 }
 explore: hits_per_minute {
-  persist_for: "5 seconds"
+  access_filter_fields: [hits_per_minute.product]
+  # persist_for: "5 seconds"
   sql_always_where:
   bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '30' minute) / 3600) as bigint)
   ,cast(truncate(to_unixtime(current_timestamp) / 3600) as bigint) ) and (ts >= current_timestamp - interval '30' minute);;
 }
 explore: hits_per_second {
+  access_filter_fields: [hits_per_second.product]
   persist_for: "5 seconds"
   sql_always_where: bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '60' second) / 60) as bigint)
   , cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
@@ -41,6 +48,7 @@ explore: hits_per_second {
   ;;
 }
 explore: events {
+  access_filter_fields: [events.product]
   persist_for: "5 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
@@ -61,6 +69,8 @@ explore: licensees {
 explore: user_activity_derive {}
 explore: events_derive {}
 explore: products {}
+explore: countries {}
+
 
 explore: user_activity_demo {}
 explore: hits_per_minute_demo {}
