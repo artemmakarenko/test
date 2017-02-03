@@ -56,12 +56,12 @@ view: user_activity {
 
   measure: sum_of_active_users {
     type: sum
-    link: {
-      label: "Active Users per Country L30M"
-      # url: "https://54.154.184.108/dashboards/24"
-      url: "https://54.154.184.108/looks/109"
-      # icon_url: "http://looker.com/favicon.ico"
-    }
+    # link: {
+    #   label: "Active Users per Country L30M"
+    #   # url: "https://54.154.184.108/dashboards/24"
+    #   url: "https://54.154.184.108/looks/109"
+    #   # icon_url: "http://looker.com/favicon.ico"
+    # }
     # icon_url: http://looker.com/favicon.ico
     sql:  ${TABLE}.active_users ;;
   #  drill_fields: [licensee,brand,product,platform,active_users]
