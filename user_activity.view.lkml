@@ -24,11 +24,7 @@ view: user_activity {
 
   dimension: lang {
     type: string
-    sql:
-    CASE
-      WHEN ${TABLE}.lang='NULL' THEN 'Unknown'
-      ELSE ${TABLE}.lang
-    END
+    sql: ${TABLE}.lang
     ;;
   }
 
@@ -62,7 +58,8 @@ view: user_activity {
     type: sum
     link: {
       label: "Active Users per Country L30M"
-      url: "https://54.154.184.108/dashboards/24"
+      # url: "https://54.154.184.108/dashboards/24"
+      url: "https://54.154.184.108/looks/109"
       # icon_url: "http://looker.com/favicon.ico"
     }
     # icon_url: http://looker.com/favicon.ico
