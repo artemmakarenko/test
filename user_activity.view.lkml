@@ -35,7 +35,7 @@ view: user_activity {
 
   dimension: mode {
     type: string
-    sql: ${TABLE}.mode ;;
+    sql: lower(${TABLE}.mode) ;;
   }
 
   dimension: platform {
