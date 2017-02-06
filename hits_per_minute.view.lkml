@@ -19,7 +19,7 @@ view: hits_per_minute {
 
   dimension: bucket {
     type: number
-    sql: ${TABLE}."bucket" ;;
+    sql: ${TABLE}.bucket ;;
   }
 
   dimension: platform {
@@ -49,7 +49,7 @@ view: hits_per_minute {
     drill_fields: [user_details*]
   }
   set: user_details {
-  fields: [licensee,brand,product,platform, amount_of_events ]
+  fields: [licensee,brand,product,platform, amount_of_events]
   }
 
 
