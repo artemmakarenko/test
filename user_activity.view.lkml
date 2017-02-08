@@ -1,6 +1,6 @@
 view: user_activity {
   sql_table_name: cassandra.bit.user_activity ;;
-  suggestions: no
+  suggestions: yes
 
   dimension: active_users {
     type: number

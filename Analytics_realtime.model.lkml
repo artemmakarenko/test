@@ -62,15 +62,16 @@ explore: events {
 }
 
 explore: licensees {
-  # join: products {
-  #   sql_on: ${licensees.product} = ${products.product} ;;
-  # }
+  join: user_activity {
+    sql_on: lower(${licensees.licensee_name})=lower(${user_activity.licensee}) ;;
+    relationship: one_to_one
+  }
 }
+
 explore: user_activity_derive {}
 explore: events_derive {}
 explore: products {}
 explore: countries {}
-
 
 explore: user_activity_demo {}
 explore: hits_per_minute_demo {}
