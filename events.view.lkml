@@ -92,4 +92,9 @@ view: events {
     sql: ${sum_of_events};;
    }
 
+  dimension: hits_tier {
+  type: tier
+  sql: ${TABLE}.hits;;
+  tiers: [0,10,20,30,40,50,60,70,80,90]
+  }
 }

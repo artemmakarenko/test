@@ -22,21 +22,52 @@ view: countries {
     sql: ${TABLE}.longitude ;;
   }
 
+  dimension: location {
+    type: location
+    sql_latitude: ${TABLE}.latitude
+      ;;
+    sql_longitude: ${TABLE}.longitude
+      ;;
+  }
+
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
   }
 
-  dimension: location {
-    type: location
-    sql_latitude: ${TABLE}.latitude
+  dimension: name2 {
+    type: string
+    sql: ${TABLE}.name ;;
+    html:
+    <p style="font-size:300%">{{ rendered_value }}</p>
     ;;
-    sql_longitude: ${TABLE}.longitude
+  }
+  dimension: name3 {
+    type: string
+    sql: ${TABLE}.name ;;
+    html:
+    <p style="font-family:courier">{{ rendered_value }}</p>
     ;;
-    }
-
-#   measure: count {
-#     type: count
-#     drill_fields: [name]
-#   }
+  }
+  dimension: name4 {
+    type: string
+    sql: ${TABLE}.name ;;
+    html:
+    <p style="text-align:center">{{ rendered_value }}</p>
+    ;;
+  }
+  dimension: name5 {
+    type: string
+    sql: ${TABLE}.name ;;
+    html:
+    <p style="color: #900000">{{ rendered_value }}</p>
+    ;;
+  }
+  dimension: name6 {
+    type: string
+    sql: ${TABLE}.name ;;
+    html:
+    <p style="color: white; background-color: #006600">{{ rendered_value }}</p>
+    ;;
+  }
 }

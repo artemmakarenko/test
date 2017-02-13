@@ -17,6 +17,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 #   }
 
 explore: user_activity {
+  label: "(1) User activity"
   access_filter_fields: [user_activity.product]
   persist_for: "5 seconds"
   sql_always_where:
@@ -33,6 +34,7 @@ explore: user_activity {
   }
 }
 explore: hits_per_minute {
+  label: "(2) Hits per minute"
   access_filter_fields: [hits_per_minute.product]
   # persist_for: "5 seconds"
   sql_always_where:
@@ -40,6 +42,7 @@ explore: hits_per_minute {
   ,cast(truncate(to_unixtime(current_timestamp) / 3600) as bigint) ) and (ts >= current_timestamp - interval '30' minute);;
 }
 explore: hits_per_second {
+  label: "(3) Hits per second"
   access_filter_fields: [hits_per_second.product]
   persist_for: "5 seconds"
   sql_always_where: bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '60' second) / 60) as bigint)
@@ -48,6 +51,7 @@ explore: hits_per_second {
   ;;
 }
 explore: events {
+  label: "(4) Events"
   access_filter_fields: [events.product]
   persist_for: "5 seconds"
   sql_always_where:
@@ -76,4 +80,5 @@ explore: countries {}
 explore: user_activity_demo {}
 explore: hits_per_minute_demo {}
 explore: hits_per_second_demo {}
-explore: events_demo {}
+
+explore: test {}
