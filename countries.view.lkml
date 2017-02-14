@@ -35,39 +35,16 @@ view: countries {
     sql: ${TABLE}.name ;;
   }
 
-  dimension: name2 {
+  dimension: iso {
     type: string
-    sql: ${TABLE}.name ;;
-    html:
-    <p style="font-size:300%">{{ rendered_value }}</p>
-    ;;
-  }
-  dimension: name3 {
-    type: string
-    sql: ${TABLE}.name ;;
-    html:
-    <p style="font-family:courier">{{ rendered_value }}</p>
-    ;;
-  }
-  dimension: name4 {
-    type: string
-    sql: ${TABLE}.name ;;
-    html:
-    <p style="text-align:center">{{ rendered_value }}</p>
-    ;;
-  }
-  dimension: name5 {
-    type: string
-    sql: ${TABLE}.name ;;
-    html:
-    <p style="color: #900000">{{ rendered_value }}</p>
-    ;;
-  }
-  dimension: name6 {
-    type: string
-    sql: ${TABLE}.name ;;
-    html:
-    <p style="color: white; background-color: #006600">{{ rendered_value }}</p>
-    ;;
+    sql:
+    case
+        when ${TABLE}.name='Estonia' then 'EST'
+        when ${TABLE}.name='Gibraltar' then 'GIB'
+        when ${TABLE}.name='Ukraine' then 'UKR'
+        when ${TABLE}.name='Philippines' then 'PHL'
+        when ${TABLE}.name='United States' then 'USA'
+    end
+      ;;
   }
 }

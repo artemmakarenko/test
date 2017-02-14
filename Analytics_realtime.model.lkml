@@ -82,3 +82,5 @@ explore: hits_per_minute_demo {}
 explore: hits_per_second_demo {}
 
 explore: test {}
+
+explore: hr_looker_training_set {}
