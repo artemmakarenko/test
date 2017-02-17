@@ -26,7 +26,8 @@ explore: user_activity {
   and (ts >= current_timestamp - interval '20' second);;
   join: user_activity_derive {
     sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
-    relationship: many_to_one
+    type: inner
+    # relationship: many_to_one
   }
   join: countries {
     sql_on: lower(${user_activity.country})=lower(${countries.name}) ;;
@@ -61,7 +62,8 @@ explore: events {
   ;;
   join: events_derive {
     sql_on: ${events.ts_raw}=${events_derive.ts_raw} ;;
-    relationship: many_to_one
+    type: inner
+    # relationship: many_to_one
   }
 }
 
