@@ -22,24 +22,18 @@ view: hr_looker_training_set {
       'aa' as element,
       'label' as label,
       2 as users
+
        union all
       select
-      'Close' as action_source,
-      'Close999' as action_dist,
+      'Click' as action_source,
+      'Display' as action_dist,
       'aa' as element,
       'label' as label,
       2 as users
 
       union all
        select
-      'Close999' as action_source,
-      'Click2' as action_dist,
-      'aa3' as element,
-      'label' as label,
-      3 as users
-      union all
-      select
-      'Click2' as action_source,
+      'Display' as action_source,
       'Display2' as action_dist,
       'aa3' as element,
       'label' as label,
@@ -47,69 +41,34 @@ view: hr_looker_training_set {
       union all
       select
       'Display2' as action_source,
-      'Close2' as action_dist,
+      'Close' as action_dist,
+      'aa3' as element,
+      'label' as label,
+      3 as users
+
+      union all
+      select
+      'Loaded' as action_source,
+      'Display2' as action_dist,
       'aa3' as element,
       'label' as label,
       3 as users
             union all
       select
-      'Close2' as action_source,
-      'Close9999' as action_dist,
+      'Display2' as action_source,
+      'Display22' as action_dist,
       'aa3' as element,
       'label' as label,
       3 as users
 
       union all
       select
-      'Close9999' as action_source,
-      'Close99999' as action_dist,
+      'Display22' as action_source,
+      'Close1' as action_dist,
       'aa2' as element,
       'label' as label,
       4 as users
-      union all
-      select
-      'Close99999' as action_source,
-      'aaa' as action_dist,
-      'aa' as element,
-      'label' as label,
-      2 as users
 
-      union all
-       select
-      'aaa' as action_source,
-      'Click22' as action_dist,
-      'aa3' as element,
-      'label' as label,
-      3 as users
-      union all
-      select
-      'Click22' as action_source,
-      'Click222' as action_dist,
-      'aa3' as element,
-      'label' as label,
-      3 as users
-      union all
-      select
-      'Click222' as action_source,
-      'Click2222' as action_dist,
-      'aa3' as element,
-      'label' as label,
-      3 as users
-            union all
-      select
-      'Click2222' as action_source,
-      'Click9' as action_dist,
-      'aa3' as element,
-      'label' as label,
-      3 as users
-
-      union all
-      select
-      'Click9' as action_source,
-      'end' as action_dist,
-      'aa2' as element,
-      'label' as label,
-      4 as users
 
       ;;
   }

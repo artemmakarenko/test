@@ -82,6 +82,22 @@ explore: countries {}
 explore: user_activity_demo {}
 explore: hits_per_minute_demo {}
 explore: hits_per_second_demo {}
+explore: events_demo {
+  always_filter: {
+    filters: {
+      field: ts_hour
+      value: "2017-01-01 00"
+    }
+
+#   conditionally_filter: {
+#     filters: {
+#       field: ts_date
+#       value: "2017-01-01"
+#     }
+#     unless: [ts_second]
+#   }
+   }
+}
 
 explore: test {}
 
