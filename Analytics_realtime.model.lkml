@@ -26,7 +26,7 @@ explore: user_activity {
   and (ts >= current_timestamp - interval '20' second);;
   join: user_activity_derive {
     sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
-    type: inner
+    type: left_outer
     relationship: many_to_one
   }
   # join: countries {
