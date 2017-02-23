@@ -48,6 +48,23 @@ view: user_activity {
     sql: lower(${TABLE}.product) ;;
   }
 
+  dimension: latitude {
+    type: number
+    sql: ${TABLE}.latitude ;;
+  }
+
+  dimension: longitude {
+    type: number
+    sql: ${TABLE}.longitude ;;
+  }
+
+  dimension: location {
+    type: location
+    sql_latitude: ${TABLE}.latitude
+      ;;
+    sql_longitude: ${TABLE}.longitude
+      ;;
+  }
   dimension_group: ts {
     type: time
     timeframes: [time, date, week, month, hour, minute, second, raw]
