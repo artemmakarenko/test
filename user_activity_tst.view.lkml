@@ -1,5 +1,5 @@
 view: user_activity_tst {
-  sql_table_name: cassandra.bit_test.user_activity ;;
+  sql_table_name: cassandra.bit.user_activity ;;
   suggestions: yes
 
   dimension: active_users {
