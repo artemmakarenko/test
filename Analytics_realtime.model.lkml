@@ -30,8 +30,8 @@ explore: user_activity {
   #   relationship: many_to_one
   # }
   sql_always_where:
-  bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
-  and ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
+  bucket = (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
+  and ts = (select ts from  cassandra.bit.last_modified where table_name='user_activity')
   ;;
 #
 #   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
