@@ -20,19 +20,19 @@ explore: user_activity {
   label: "(1) User activity"
   access_filter_fields: [user_activity.product]
   persist_for: "30 seconds"
+  # sql_always_where:
+  # bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
+  # cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
+  # and (ts >= current_timestamp - interval '20' second);;
+  # join: user_activity_derive {
+  #   sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
+  #   type: inner
+  #   relationship: many_to_one
+  # }
   sql_always_where:
-  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
-  cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
-  and (ts >= current_timestamp - interval '20' second);;
-  join: user_activity_derive {
-    sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
-    type: inner
-    relationship: many_to_one
-  }
-#   sql_always_where:
-#   user_activity.bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
-#   and user_activity.ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
-#   ;;
+  user_activity.bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
+  and user_activity.ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
+  ;;
 #
 #   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
 #   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
