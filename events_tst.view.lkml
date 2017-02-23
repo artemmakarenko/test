@@ -1,4 +1,4 @@
-view: events_demo {
+view: events_tst {
   sql_table_name: cassandra.bit.events ;;
   suggestions: no
 
@@ -9,18 +9,18 @@ view: events_demo {
 
   dimension: action {
     type: string
-    sql: ${TABLE}.action ;;
+    sql: ${TABLE}.action;;
+    # CASE
+    #   WHEN ${TABLE}.action='NULL' THEN 'Unknown'
+    #   ELSE ${TABLE}.action
+    # END
+    # ;;
     drill_fields:  [category, label]
   }
 
   dimension: brand {
     type: string
     sql: ${TABLE}.brand ;;
-    link: {
-      label: "Google"
-      url: "http://www.google.com/search?q={{value}}"
-      icon_url: "http://google.com/favicon.ico"
-    }
     #   drill_fields:  [category, action, label]
   }
 
@@ -30,7 +30,7 @@ view: events_demo {
     drill_fields:  [ action, label]
   }
 
-  dimension: hits {
+  dimension: amount_of_events {
     type: number
     sql: ${TABLE}.hits ;;
   }
@@ -38,7 +38,7 @@ view: events_demo {
   dimension: label {
     type: string
     sql: ${TABLE}.label ;;
-    drill_fields:  [category, action]
+    # drill_fields:  [category, action, amount_of_events]
   }
 
   dimension: licensee {
@@ -60,54 +60,41 @@ view: events_demo {
 
   dimension_group: ts {
     type: time
-    timeframes: [time, hour, minute,second, date, week, month]
+    timeframes: [time, hour, minute,second, date, week, month, raw]
     sql: ${TABLE}.ts ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: []
-  }
-
-  measure: sum {
+  # measure: count {
+  #   type: count
+  #   drill_fields: []
+  # }
+  measure: sum_of_events {
     type: sum
-    sql: ${TABLE}.hits ;;
+    sql: coalesce(${TABLE}.hits,0) ;;
+    drill_fields: [user_details*]
   }
 
+  set: user_details {
+    fields: [category, action, label, amount_of_events ]
+  }
 #   measure: percent_of_total_hits {
 #     type: percent_of_total
 #     sql: ${sum} ;;
 #   }
 
-  dimension: licensee_filter {
-    sql: ${TABLE}.licensee ;;
-    suggestions: ["playtechhorizon-licensees","UNKNOWN"]
-  }
+  # dimension: product_filter {
+  #   sql: ${TABLE}.product ;;
+  #   suggestions: ["casino","IMS"]
 
-  dimension: brand_filter {
-    sql: ${TABLE}.brand ;;
-    suggestions: ["playtechhorizon","PT"    ]
-  }
-
-  dimension: product_filter {
-    sql: ${TABLE}.product ;;
-    suggestions: ["casino","IMS"]
-
-  }
-  dimension: product_filter2 {
-    sql:select distinct ${TABLE}.product ;;
-    # suggestions: []
-  }
-
+  # }
   measure: percent_of_total_hits {
     type: percent_of_total
-    sql: ${sum};;
+    sql: ${sum_of_events};;
   }
 
-  dimension: L2 {
-    sql: licensees.licensee_name ;;
-#    suggest_explore: licensees
- #   suggest_dimension: licensees.licensee_name
+  dimension: hits_tier {
+    type: tier
+    sql: ${TABLE}.hits;;
+    tiers: [0,10,20,30,40,50,60,70,80,90]
   }
-
 }

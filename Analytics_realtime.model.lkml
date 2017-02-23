@@ -19,7 +19,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 explore: user_activity {
   label: "(1) User activity"
   access_filter_fields: [user_activity.product]
-  persist_for: "5 seconds"
+  persist_for: "10 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
@@ -27,7 +27,7 @@ explore: user_activity {
   join: user_activity_derive {
     sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
     type: inner
-    # relationship: many_to_one
+    relationship: many_to_one
   }
   join: countries {
     sql_on: lower(${user_activity.country})=lower(${countries.name}) ;;
@@ -45,7 +45,7 @@ explore: hits_per_minute {
 explore: hits_per_second {
   label: "(3) Hits per second"
   access_filter_fields: [hits_per_second.product]
-  persist_for: "5 seconds"
+  persist_for: "10 seconds"
   sql_always_where: bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '60' second) / 60) as bigint)
   , cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
   and (ts >= current_timestamp - interval '60' second)
@@ -54,7 +54,7 @@ explore: hits_per_second {
 explore: events {
   label: "(4) Events"
   access_filter_fields: [events.product]
-  persist_for: "5 seconds"
+  persist_for: "10 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
@@ -63,7 +63,7 @@ explore: events {
   join: events_derive {
     sql_on: ${events.ts_raw}=${events_derive.ts_raw} ;;
     type: inner
-    # relationship: many_to_one
+    relationship: many_to_one
   }
 }
 
@@ -79,15 +79,15 @@ explore: events_derive {}
 explore: products {}
 explore: countries {}
 
-explore: user_activity_demo {}
-explore: hits_per_minute_demo {}
-explore: hits_per_second_demo {}
-explore: events_demo {
-  always_filter: {
-    filters: {
-      field: ts_hour
-      value: "2017-01-01 00"
-    }
+# explore: user_activity_demo {}
+# explore: hits_per_minute_demo {}
+# explore: hits_per_second_demo {}
+# explore: events_demo {
+#   always_filter: {
+#     filters: {
+#       field: ts_hour
+#       value: "2017-01-01 00"
+#     }
 
 #   conditionally_filter: {
 #     filters: {
@@ -96,10 +96,8 @@ explore: events_demo {
 #     }
 #     unless: [ts_second]
 #   }
-   }
-}
-
-explore: test {}
+#   }
+# }
 
 explore: hr_looker_training_set {}
 explore: user_journey {}

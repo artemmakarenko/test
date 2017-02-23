@@ -1,4 +1,4 @@
-view: hits_per_minute_demo {
+view: hits_per_minute_tst {
   sql_table_name: cassandra.bit.hits_per_minute ;;
   suggestions: no
 
@@ -7,7 +7,7 @@ view: hits_per_minute_demo {
     sql: ${TABLE}.brand ;;
   }
 
-  dimension: hits {
+  dimension: amount_of_events {
     type: number
     sql: ${TABLE}.hits ;;
   }
@@ -19,7 +19,7 @@ view: hits_per_minute_demo {
 
   dimension: bucket {
     type: number
-    sql: ${TABLE}."bucket" ;;
+    sql: ${TABLE}.bucket ;;
   }
 
   dimension: platform {
@@ -29,12 +29,12 @@ view: hits_per_minute_demo {
 
   dimension: product {
     type: string
-    sql: ${TABLE}.product ;;
+    sql: lower(${TABLE}.product) ;;
   }
 
   dimension_group: ts {
     type: time
-    timeframes: [time, date, week, month, minute, hour]
+    timeframes: [time, date, week, month, minute, hour, second]
     sql: ${TABLE}.ts ;;
   }
 
@@ -46,8 +46,12 @@ view: hits_per_minute_demo {
   measure: sum {
     type: sum
     sql:  ${TABLE}.hits ;;
-    drill_fields: []
+    drill_fields: [user_details*]
   }
+  set: user_details {
+    fields: [licensee,brand,product,platform, amount_of_events]
+  }
+
 
   measure: percent_sum_growth {
     type: percent_of_previous
