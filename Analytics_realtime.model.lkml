@@ -19,7 +19,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 explore: user_activity {
   label: "(1) User activity"
   access_filter_fields: [user_activity.product]
-  persist_for: "30 seconds"
+  # persist_for: "15 seconds"
   # sql_always_where:
   # bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
   # cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
@@ -30,8 +30,8 @@ explore: user_activity {
   #   relationship: many_to_one
   # }
   sql_always_where:
-  user_activity.bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
-  and user_activity.ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
+  bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
+  and ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
   ;;
 #
 #   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
