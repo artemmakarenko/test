@@ -29,10 +29,10 @@ explore: user_activity {
     type: inner
     relationship: many_to_one
   }
-  join: countries {
-    sql_on: lower(${user_activity.country})=lower(${countries.name}) ;;
-    relationship: many_to_one
-  }
+  # join: countries {
+  #   sql_on: lower(${user_activity.country})=lower(${countries.name}) ;;
+  #   relationship: many_to_one
+  # }
 }
 explore: hits_per_minute {
   label: "(2) Hits per minute"
@@ -77,7 +77,7 @@ explore: licensees {
 explore: user_activity_derive {}
 explore: events_derive {}
 explore: products {}
-explore: countries {}
+# explore: countries {}
 
 # explore: user_activity_demo {}
 # explore: hits_per_minute_demo {}
