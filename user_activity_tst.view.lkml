@@ -1,5 +1,5 @@
 view: user_activity_tst {
-  sql_table_name: cassandra.bit.user_activity ;;
+  sql_table_name: cassandra.bit_test.user_activity ;;
   suggestions: yes
 
   dimension: active_users {
@@ -46,6 +46,14 @@ view: user_activity_tst {
   dimension: product {
     type: string
     sql: lower(${TABLE}.product) ;;
+  }
+
+  dimension: location {
+    type: location
+    sql_latitude: ${TABLE}.latitude
+      ;;
+    sql_longitude: ${TABLE}.longitude
+      ;;
   }
 
   dimension_group: ts {

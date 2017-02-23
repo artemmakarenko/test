@@ -19,7 +19,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 explore: user_activity {
   label: "(1) User activity"
   access_filter_fields: [user_activity.product]
-  persist_for: "10 seconds"
+  persist_for: "15 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
@@ -45,7 +45,7 @@ explore: hits_per_minute {
 explore: hits_per_second {
   label: "(3) Hits per second"
   access_filter_fields: [hits_per_second.product]
-  persist_for: "10 seconds"
+  persist_for: "15 seconds"
   sql_always_where: bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '60' second) / 60) as bigint)
   , cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
   and (ts >= current_timestamp - interval '60' second)
@@ -54,7 +54,7 @@ explore: hits_per_second {
 explore: events {
   label: "(4) Events"
   access_filter_fields: [events.product]
-  persist_for: "10 seconds"
+  persist_for: "15 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
