@@ -21,14 +21,18 @@ explore: user_activity {
   access_filter_fields: [user_activity.product]
   persist_for: "30 seconds"
   sql_always_where:
-  bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
-  cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
-  and (ts >= current_timestamp - interval '20' second);;
-  join: user_activity_derive {
-    sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
-    type: left_outer
-    relationship: many_to_one
-  }
+  user_activity.bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
+  and user_activity.ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
+  ;;
+#
+#   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
+#   cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
+#   and (ts >= current_timestamp - interval '20' second);;
+#   join: user_activity_derive {
+#     sql_on: ${user_activity.ts_raw}=${user_activity_derive.ts_raw} ;;
+#     type: left_outer
+#     relationship: many_to_one
+#   }
   # join: countries {
   #   sql_on: lower(${user_activity.country})=lower(${countries.name}) ;;
   #   relationship: many_to_one
@@ -101,3 +105,21 @@ explore: products {}
 
 explore: hr_looker_training_set {}
 explore: user_journey {}
+
+explore: last_modified {}
+
+explore: user_activity2 {
+  sql_always_where:
+  user_activity2.bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
+  and user_activity2.ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
+    ;;
+#   join: last_modified {
+#     sql_on: ${user_activity2.ts_raw}=${last_modified.ts_derive_raw} ;;
+#     type: inner
+#     relationship: many_to_one
+#   }
+  # join: countries {
+  #   sql_on: lower(${user_activity.country})=lower(${countries.name}) ;;
+  #   relationship: many_to_one
+  # }
+}
