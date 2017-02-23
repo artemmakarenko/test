@@ -19,7 +19,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 explore: user_activity {
   label: "(1) User activity"
   access_filter_fields: [user_activity.product]
-  # persist_for: "15 seconds"
+  persist_for: "15 seconds"
   # sql_always_where:
   # bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
   # cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
