@@ -1,5 +1,5 @@
 view: countries_tst {
-  sql_table_name: cassandra.bit.countries ;;
+  sql_table_name: cassandra.playtech_dwh.countries ;;
   suggestions: no
 
   dimension: capital {

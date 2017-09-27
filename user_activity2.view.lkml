@@ -1,5 +1,5 @@
 view: user_activity2 {
-  sql_table_name: cassandra.bit.user_activity ;;
+  sql_table_name: cassandra.playtech_dwh.user_activity ;;
   suggestions: yes
 
   dimension: active_users {

@@ -1,5 +1,5 @@
 view: events_tst {
-  sql_table_name: cassandra.bit.events ;;
+  sql_table_name: cassandra.playtech_dwh.events ;;
   suggestions: no
 
   dimension: bucket {

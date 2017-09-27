@@ -1,5 +1,5 @@
 view: hits_per_second_tst {
-  sql_table_name: cassandra.bit.hits_per_second ;;
+  sql_table_name: cassandra.playtech_dwh.hits_per_second ;;
   suggestions: no
 
   dimension: bucket {

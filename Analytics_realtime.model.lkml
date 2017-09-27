@@ -18,7 +18,7 @@ include: "*.dashboard.lookml"  # include all dashboards in this project
 
 explore: user_activity {
   label: "(1) User activity"
-  access_filter_fields: [user_activity.product]
+  # access_filter_fields: [user_activity.product]
   persist_for: "20 seconds"
 #   sql_always_where:
 #   user_activity.bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
@@ -61,15 +61,15 @@ explore: user_activity {
 #}
 explore: hits_per_minute {
   label: "(2) Hits per minute"
-  access_filter_fields: [hits_per_minute.product]
+  # access_filter_fields: [hits_per_minute.product]
   # persist_for: "5 seconds"
   sql_always_where:
-  bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '30' minute) / 3600) as bigint)
-  ,cast(truncate(to_unixtime(current_timestamp) / 3600) as bigint) ) and (ts >= current_timestamp - interval '30' minute);;
+  bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '31' minute) / 3600) as bigint)
+  ,cast(truncate(to_unixtime(current_timestamp) / 3600) as bigint) ) and (ts >= current_timestamp - interval '31' minute);;
 }
 explore: hits_per_second {
   label: "(3) Hits per second"
-  access_filter_fields: [hits_per_second.product]
+  # access_filter_fields: [hits_per_second.product]
   persist_for: "20 seconds"
   sql_always_where: bucket IN (cast(truncate(to_unixtime(current_timestamp - interval '60' second) / 60) as bigint)
   , cast(truncate(to_unixtime(current_timestamp) / 60) as bigint))
@@ -78,7 +78,7 @@ explore: hits_per_second {
 }
 explore: events {
   label: "(4) Events"
-  access_filter_fields: [events.product]
+  # access_filter_fields: [events.product]
   persist_for: "20 seconds"
   sql_always_where:
   bucket in (cast(truncate(to_unixtime(current_timestamp - interval '20' second) / 60) as bigint),
@@ -131,8 +131,8 @@ explore: last_modified {}
 
 explore: user_activity2 {
   sql_always_where:
-  user_activity2.bucket in (select bucket from  cassandra.bit.last_modified where table_name='user_activity')
-  and user_activity2.ts in (select ts from  cassandra.bit.last_modified where table_name='user_activity')
+  user_activity2.bucket in (select bucket from  cassandra.playtech_dwh.last_modified where table_name='user_activity')
+  and user_activity2.ts in (select ts from  cassandra.playtech_dwh.last_modified where table_name='user_activity')
     ;;
 #   join: last_modified {
 #     sql_on: ${user_activity2.ts_raw}=${last_modified.ts_derive_raw} ;;

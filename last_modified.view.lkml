@@ -1,5 +1,5 @@
 view: last_modified {
-  sql_table_name: cassandra.bit.last_modified ;;
+  sql_table_name: cassandra.playtech_dwh.last_modified ;;
   suggestions: no
 
   dimension: bucket_derive {

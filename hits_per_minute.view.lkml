@@ -1,5 +1,5 @@
 view: hits_per_minute {
-  sql_table_name: cassandra.bit.hits_per_minute ;;
+  sql_table_name: cassandra.playtech_dwh.hits_per_minute ;;
   suggestions: no
 
   dimension: brand {

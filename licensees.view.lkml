@@ -1,5 +1,5 @@
 view: licensees {
-  sql_table_name: cassandra.bit.licensees ;;
+  sql_table_name: cassandra.playtech_dwh.licensees ;;
   suggestions: yes
 
   dimension: brand_id {

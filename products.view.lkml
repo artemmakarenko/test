@@ -1,5 +1,5 @@
 view: products {
-  sql_table_name: cassandra.bit.products ;;
+  sql_table_name: cassandra.playtech_dwh.products ;;
   suggestions: yes
 
   dimension: product {
